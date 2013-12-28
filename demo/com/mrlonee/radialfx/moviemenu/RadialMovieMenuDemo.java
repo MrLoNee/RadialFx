@@ -1,5 +1,4 @@
 /**
- * RadialMenuEnhancedDemo
  * Copyright 2013 (C) Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com
  *
  * This program is free software; you can redistribute it and/or
@@ -16,7 +15,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.mrlonee.radialfx.staticmenu;
+package com.mrlonee.radialfx.moviemenu;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,14 +34,14 @@ import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 
-public class RadialStaticMenuDemo extends Application {
+public class RadialMovieMenuDemo extends Application {
 
     public static void main(final String[] args) {
 	launch(args);
     }
 
     private Group container;
-    private RadialStaticMenu radialMenu;
+    private RadialMovieMenu radialMenu;
 
     @Override
     public void start(final Stage primaryStage) throws Exception {
@@ -57,7 +56,17 @@ public class RadialStaticMenuDemo extends Application {
 	primaryStage.setTitle("Radial Static Menu Demo");
 	primaryStage.show();
 
-	radialMenu = new RadialStaticMenu();
+	final double itemInnerRadius = 60;
+	final double itemRadius = 95;
+	final double centerClosedRadius = 28;
+	final double centerOpenedRadius = 40;
+
+	final String[] menus = new String[] { "DOWLOADS", "SYNOPSIS", "VIDEO",
+		"PHOTO", "GAME", "CAST & CREW" };
+
+	radialMenu = new RadialMovieMenu(menus, itemInnerRadius, itemRadius,
+		centerClosedRadius, centerOpenedRadius);
+
 	radialMenu.setTranslateX(200);
 	radialMenu.setTranslateY(200);
 	container.getChildren().addAll(radialMenu);
@@ -79,7 +88,7 @@ public class RadialStaticMenuDemo extends Application {
 	    public void handle(final KeyEvent event) {
 		System.out.println(event);
 		if (event.getCode() == KeyCode.F5) {
-		    RadialStaticMenuDemo.this.takeSnapshot(scene);
+		    RadialMovieMenuDemo.this.takeSnapshot(scene);
 		}
 	    }
 	});

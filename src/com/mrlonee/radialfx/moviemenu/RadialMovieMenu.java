@@ -1,4 +1,20 @@
-package com.mrlonee.radialfx.staticmenu;
+/**
+ * Copyright 2013 (C) Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+ */
+package com.mrlonee.radialfx.moviemenu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,40 +52,51 @@ import javafx.util.Duration;
 import com.mrlonee.radialfx.core.RadialMenuItem;
 import com.mrlonee.radialfx.core.RadialMenuItemBuilder;
 
-public class RadialStaticMenu extends Group {
+public class RadialMovieMenu extends Group {
 
+
+    private double itemInnerRadius = 60;
+    private double itemRadius = 95;
+    private double centerClosedRadius = 28;
+    private double centerOpenedRadius = 40;
+    private String[] menus;
+
+    private Circle center;
+    private final List<RadialMenuItem> items;
     private final Group itemsGroup = new Group();
     private final Group textsGroup = new Group();
-    private Circle center;
-    private final Color centerColor = Color.web("ffffff");
-    private final Color itemColor = Color.web("ffffff80");
-
-    private final double itemInnerRadius = 60;
-    private final double itemRadius = 95;
-    private final double centerClosedRadius = 28;
-    private final double centerOpenedRadius = 40;
-    private final List<RadialMenuItem> items;
-    private final String[] menus = new String[] { "DOWLOADS", "SYNOPSIS",
-	    "VIDEO", "PHOTO", "GAME", "CAST & CREW" };
-    private final Map<RadialMenuItem, List<Text>> itemToTexts = new HashMap<RadialMenuItem, List<Text>>();
-    final Font textFont = Font.font(java.awt.Font.SANS_SERIF,
-	    FontWeight.NORMAL, 11);
-    final Font textFontBold = Font.font(java.awt.Font.SANS_SERIF,
-	    FontWeight.BOLD, 11);
-    final Font menuFont = Font.font(java.awt.Font.SANS_SERIF, FontWeight.BOLD,
-	    12);
-    final Paint textColor = Color.web("000000a0");
     private Circle fakeBackground;
-    private double animDuration = 350;
-    private Animation openTransition;
-    private Paint strokeColor = Color.web("c0c0c0");
     private Text centerText;
     private Circle radiusStroke;
     private Circle innerRadiusStroke;
 
-    public RadialStaticMenu() {
+    private final Color centerColor = Color.web("ffffff");
+    private final Color itemColor = Color.web("ffffff80");
+    private final Paint textColor = Color.web("000000a0");
+    private Paint strokeColor = Color.web("c0c0c0");
+
+    final Font textFont = Font.font(java.awt.Font.SANS_SERIF,FontWeight.NORMAL, 11);
+    final Font textFontBold = Font.font(java.awt.Font.SANS_SERIF,FontWeight.BOLD, 11);
+    final Font menuFont = Font.font(java.awt.Font.SANS_SERIF, FontWeight.BOLD,12);
+
+    private double animDuration = 350;
+    private Animation openTransition;
+    private final Map<RadialMenuItem, List<Text>> itemToTexts;
+
+    public RadialMovieMenu(final String[] itemNames,
+	    final double innerRadius,
+	    final double radius, final double centerClosedRadius,
+	    final double centerOpenedRadius) {
+
+	menus = itemNames;
+	itemInnerRadius = innerRadius;
+	itemRadius = radius;
+	this.centerClosedRadius = centerClosedRadius;
+	this.centerOpenedRadius = centerOpenedRadius;
+
+	itemToTexts = new HashMap<RadialMenuItem, List<Text>>();
 	items = new ArrayList<RadialMenuItem>();
-	int i = 0;
+
 	double menuLetterNumber = 0;
 	for (final String itemTitle : menus) {
 	    menuLetterNumber += itemTitle.length();
@@ -85,7 +112,6 @@ public class RadialStaticMenu extends Group {
 
 	for (final String itemTitle : menus) {
 	    final double length = 360.0 * (itemTitle.length() / menuLetterNumber);
-	    System.out.println(i + " " + startAngle + " " + length);
 	    final RadialMenuItem item = RadialMenuItemBuilder.create()
 		    .backgroundFill(itemColor).innerRadius(0).radius(1)
 		    .strokeVisible(false).offset(0).startAngle(startAngle)
@@ -117,7 +143,6 @@ public class RadialStaticMenu extends Group {
 	    item.setOnMouseClicked(itemEventHandler);
 
 	    startAngle += length;
-	    i++;
 	}
 
 	center = CircleBuilder.create().fill(centerColor)
