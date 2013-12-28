@@ -1,6 +1,5 @@
 /**
- * RadialMenuGame
- * Copyright 2013 (C) Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com 
+ * Copyright 2013 (C) Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
@@ -73,12 +72,6 @@ public class RadialGlobalMenu extends Group {
     public RadialGlobalMenu() {
 	backContainer = new Group();
 
-	addMenuItem("resources/icons/gemicon/PNG/64x64/row 1/13.png", null);
-	addMenuItem("resources/icons/gemicon/PNG/64x64/row 1/6.png", null);
-	addMenuItem("resources/icons/gemicon/PNG/64x64/row 4/6.png", null);
-	addMenuItem("resources/icons/gemicon/PNG/64x64/row 4/3.png", null);
-	addMenuItem("resources/icons/gemicon/PNG/64x64/row 6/14.png", null);
-	addMenuItem("resources/icons/gemicon/PNG/64x64/row 7/7.png", null);
 	final ChangeListener<Number> sizeChangeListener = new ChangeListener<Number>() {
 
 	    @Override
@@ -97,12 +90,10 @@ public class RadialGlobalMenu extends Group {
 
     public DoubleProperty widthProperty() {
 	return widthProp;
-
     }
 
     public DoubleProperty heightProperty() {
 	return heightProp;
-
     }
 
     private void computeBack() {
@@ -121,11 +112,13 @@ public class RadialGlobalMenu extends Group {
 	backContainer.getChildren().setAll(rect);
     }
 
-    private void addMenuItem(final String iconPath,
+    public void addMenuItem(final String iconPath,
 	    final EventHandler<MouseEvent> eventHandler) {
+
 	final RadialGradient backGradient = new RadialGradient(0, 0, 0, 0,
 		radius.get(), false, CycleMethod.NO_CYCLE, new Stop(0,
 			BACK_GRADIENT_COLOR), new Stop(1, Color.TRANSPARENT));
+
 	final RadialGradient backSelectGradient = new RadialGradient(0, 0, 0,
 		0, radius.get(), false, CycleMethod.NO_CYCLE, new Stop(0,
 			BACK_SELECT_GRADIENT_COLOR), new Stop(1,
@@ -138,7 +131,9 @@ public class RadialGlobalMenu extends Group {
 		.innerRadius(innerRadius).radius(radius).offset(offset)
 		.clockwise(true).backgroundVisible(true).strokeVisible(false)
 		.build();
+
 	item.setOnMouseClicked(eventHandler);
+
 	items.add(item);
 	itemsContainer.getChildren().addAll(item);
     }

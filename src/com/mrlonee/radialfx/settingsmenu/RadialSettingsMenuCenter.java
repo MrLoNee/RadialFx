@@ -1,6 +1,5 @@
 /**
- * RadialMenuEnhancedCenter
- * Copyright 2013 (C) Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com 
+ * Copyright 2013 (C) Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
@@ -36,18 +35,18 @@ public class RadialSettingsMenuCenter extends Group {
     private Group hideTransitionGroup = new Group();
 
     RadialSettingsMenuCenter() {
-	this.getChildren().add(this.hideTransitionGroup);
-	this.getChildren().add(this.showTransitionGroup);
-	this.showTransition = FadeTransitionBuilder.create()
-		.duration(Duration.millis(400)).node(this.showTransitionGroup)
+	getChildren().add(hideTransitionGroup);
+	getChildren().add(showTransitionGroup);
+	showTransition = FadeTransitionBuilder.create()
+		.duration(Duration.millis(400)).node(showTransitionGroup)
 		.fromValue(0.0).toValue(1.0).build();
-	this.hideTransition = FadeTransitionBuilder.create()
-		.duration(Duration.millis(400)).node(this.hideTransitionGroup)
+	hideTransition = FadeTransitionBuilder.create()
+		.duration(Duration.millis(400)).node(hideTransitionGroup)
 		.fromValue(1.0).toValue(0.0).build();
     }
 
-    void addCenterItem(Object key, Node centerGraphic) {
-	this.centerGraphics.put(key, centerGraphic);
+    void addCenterItem(final Object key, final Node centerGraphic) {
+	centerGraphics.put(key, centerGraphic);
 	centerGraphic.setTranslateX(-centerGraphic.getBoundsInLocal()
 		.getWidth() / 2.0);
 	centerGraphic.setTranslateY(-centerGraphic.getBoundsInLocal()
@@ -55,14 +54,14 @@ public class RadialSettingsMenuCenter extends Group {
     }
 
     void displayCenter(final Object key) {
-	final Node node = this.centerGraphics.get(key);
-	this.showTransitionGroup.getChildren().setAll(node);
-	this.showTransition.playFromStart();
+	final Node node = centerGraphics.get(key);
+	showTransitionGroup.getChildren().setAll(node);
+	showTransition.playFromStart();
     }
 
     void hideCenter(final Object key) {
-	final Node node = this.centerGraphics.get(key);
-	this.hideTransitionGroup.getChildren().setAll(node);
-	this.hideTransition.playFromStart();
+	final Node node = centerGraphics.get(key);
+	hideTransitionGroup.getChildren().setAll(node);
+	hideTransition.playFromStart();
     }
 }

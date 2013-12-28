@@ -1,6 +1,5 @@
 /**
- * RadialMenuEnhanced
- * Copyright 2013 (C) Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com 
+ * Copyright 2013 (C) Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License

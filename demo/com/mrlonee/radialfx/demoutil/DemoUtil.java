@@ -1,3 +1,19 @@
+/**
+ * Copyright 2013 (C) Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+ */
 package com.mrlonee.radialfx.demoutil;
 
 import java.text.DecimalFormat;
@@ -23,13 +39,13 @@ public class DemoUtil extends VBox {
     }
 
     public void addAngleControl(final String title, final DoubleProperty prop) {
-	Slider slider = this.addSliderControl(title, prop);
+	final Slider slider = addSliderControl(title, prop);
 	slider.setMin(0);
 	slider.setMax(360);
     }
 
-    public void addRadiusControl(String title, DoubleProperty prop) {
-	Slider slider = this.addSliderControl(title, prop);
+    public void addRadiusControl(final String title, final DoubleProperty prop) {
+	final Slider slider = addSliderControl(title, prop);
 	slider.setMin(0);
 	slider.setMax(500);
     }
@@ -39,8 +55,8 @@ public class DemoUtil extends VBox {
 	final Slider slider = new Slider();
 	slider.setValue(prop.get());
 	prop.bind(slider.valueProperty());
-	VBox box = new VBox();
-	Text titleText = new Text(title);
+	final VBox box = new VBox();
+	final Text titleText = new Text(title);
 
 	titleText.textProperty().bind(new StringBinding() {
 	    {
@@ -50,12 +66,12 @@ public class DemoUtil extends VBox {
 	    @Override
 	    protected String computeValue() {
 		return title + " : "
-			+ DemoUtil.this.twoDForm.format(slider.getValue());
+			+ twoDForm.format(slider.getValue());
 	    }
 
 	});
 	box.getChildren().addAll(titleText, slider);
-	this.getChildren().add(box);
+	getChildren().add(box);
 	return slider;
     }
 
@@ -65,8 +81,8 @@ public class DemoUtil extends VBox {
 		.value((Color) paintProperty.get()).build();
 
 	paintProperty.bind(colorPicker.valueProperty());
-	VBox box = new VBox();
-	Text titleText = new Text(title);
+	final VBox box = new VBox();
+	final Text titleText = new Text(title);
 
 	titleText.textProperty().bind(new StringBinding() {
 	    {
@@ -80,7 +96,7 @@ public class DemoUtil extends VBox {
 
 	});
 	box.getChildren().addAll(titleText, colorPicker);
-	this.getChildren().add(box);
+	getChildren().add(box);
     }
 
     public void addBooleanControl(final String title,
@@ -89,8 +105,8 @@ public class DemoUtil extends VBox {
 	check.setSelected(boolProp.get());
 	boolProp.bind(check.selectedProperty());
 
-	VBox box = new VBox();
-	Text titleText = new Text(title);
+	final VBox box = new VBox();
+	final Text titleText = new Text(title);
 
 	titleText.textProperty().bind(new StringBinding() {
 	    {
@@ -105,7 +121,7 @@ public class DemoUtil extends VBox {
 
 	});
 	box.getChildren().addAll(titleText, check);
-	this.getChildren().add(box);
+	getChildren().add(box);
 
     }
 }

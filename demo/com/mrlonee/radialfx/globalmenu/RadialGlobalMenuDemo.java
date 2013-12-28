@@ -1,6 +1,5 @@
 /**
- * RadialMenuEnhancedDemo
- * Copyright 2013 (C) Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com 
+ * Copyright 2013 (C) Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
@@ -64,6 +63,12 @@ public class RadialGlobalMenuDemo extends Application {
 	primaryStage.toFront();
 
 	radialMenu = new RadialGlobalMenu();
+	radialMenu.addMenuItem("resources/icons/gemicon/PNG/64x64/row 1/13.png", null);
+	radialMenu.addMenuItem("resources/icons/gemicon/PNG/64x64/row 1/6.png", null);
+	radialMenu.addMenuItem("resources/icons/gemicon/PNG/64x64/row 4/6.png", null);
+	radialMenu.addMenuItem("resources/icons/gemicon/PNG/64x64/row 4/3.png", null);
+	radialMenu.addMenuItem("resources/icons/gemicon/PNG/64x64/row 6/14.png", null);
+	radialMenu.addMenuItem("resources/icons/gemicon/PNG/64x64/row 7/7.png", null);
 
 	radialMenu.translateXProperty().bind(scene.widthProperty().divide(2.0));
 	radialMenu.translateYProperty()

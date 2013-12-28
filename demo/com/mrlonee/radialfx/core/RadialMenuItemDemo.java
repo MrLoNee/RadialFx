@@ -1,3 +1,19 @@
+/**
+ * Copyright 2013 (C) Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+ */
 package com.mrlonee.radialfx.core;
 
 import javafx.application.Application;
@@ -21,7 +37,7 @@ public class RadialMenuItemDemo extends Application {
 	item.setTranslateX(400);
 	item.setTranslateY(300);
 
-	DemoUtil demoUtil = new DemoUtil();
+	final DemoUtil demoUtil = new DemoUtil();
 	demoUtil.addAngleControl("StartAngle", item.startAngleProperty());
 	demoUtil.addAngleControl("Length", item.lengthProperty());
 	demoUtil.addRadiusControl("Inner Radius", item.innerRadiusProperty());
@@ -43,7 +59,7 @@ public class RadialMenuItemDemo extends Application {
 	stage.setScene(new Scene(demoControls));
 	stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 	    @Override
-	    public void handle(WindowEvent arg0) {
+	    public void handle(final WindowEvent arg0) {
 		System.exit(0);
 	    }
 	});

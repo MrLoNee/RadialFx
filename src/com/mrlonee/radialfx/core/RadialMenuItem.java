@@ -1,6 +1,5 @@
 /**
- * RadialMenuItem
- * Copyright 2013 (C) Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com 
+ * Copyright 2013 (C) Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
@@ -40,11 +39,14 @@ import javafx.scene.shape.Path;
 
 /**
  * Radial Menu Item that is the base item for radial menu.
- * 
+ *
  * @author Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com
  */
 public class RadialMenuItem extends Group implements ChangeListener<Object> {
 
+    /*************************************************************************************
+     * Property part
+     *************************************************************************************/
     protected DoubleProperty startAngle = new SimpleDoubleProperty(0);
 
     protected DoubleProperty length = new SimpleDoubleProperty(45);
@@ -76,6 +78,9 @@ public class RadialMenuItem extends Group implements ChangeListener<Object> {
 
     protected ObjectProperty<Node> graphic = new SimpleObjectProperty<Node>();
 
+    /*****************************************************************************
+     * Graphic Part
+     *****************************************************************************/
     protected MoveTo moveTo;
 
     protected ArcTo arcToInner;
@@ -85,6 +90,12 @@ public class RadialMenuItem extends Group implements ChangeListener<Object> {
     protected LineTo lineTo;
 
     protected LineTo lineTo2;
+
+    protected Path path;
+
+    protected Group graphicContainer = new Group();
+
+    protected String text;
 
     protected double innerStartX;
 
@@ -115,12 +126,6 @@ public class RadialMenuItem extends Group implements ChangeListener<Object> {
     protected double translateY;
 
     protected boolean mouseOn = false;
-
-    protected Path path;
-
-    protected String text;
-
-    protected Group graphicContainer = new Group();
 
     public RadialMenuItem() {
 	length.addListener(this);
