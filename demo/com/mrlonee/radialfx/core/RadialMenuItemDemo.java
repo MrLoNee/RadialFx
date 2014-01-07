@@ -54,6 +54,8 @@ public class RadialMenuItemDemo extends Application {
 		item.backgroundVisibleProperty());
 	demoUtil.addBooleanControl("StrokeVisible",
 		item.strokeVisibleProperty());
+	demoUtil.addGraphicControl("Graphic",
+		item.graphicProperty());
 
 	final Group demoControls = new Group(item, demoUtil);
 	stage.setScene(new Scene(demoControls));
