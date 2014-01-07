@@ -15,7 +15,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.mrlonee.radialfx.moviemenu;
+package com.mrlonee.radialfx.colormenu;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,26 +34,26 @@ import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 
-public class RadialMovieMenuDemo extends Application {
+public class RadialColorMenuDemo extends Application {
 
     public static void main(final String[] args) {
 	launch(args);
     }
 
     private Group container;
-    private RadialMovieMenu radialMenu;
+    private RadialColorMenu radialMenu;
 
     @Override
     public void start(final Stage primaryStage) throws Exception {
 	container = new Group();
 	final Scene scene = new Scene(container);
-	scene.setFill(Color.LIGHTBLUE);
+	scene.setFill(Color.WHITE);
 	primaryStage.setResizable(false);
 	primaryStage.setScene(scene);
 	primaryStage.setWidth(450);
 	primaryStage.setHeight(480);
 	primaryStage.centerOnScreen();
-	primaryStage.setTitle("Radial Movie Menu Demo");
+	primaryStage.setTitle("Radial Color Menu Demo");
 	primaryStage.show();
 
 	final double itemInnerRadius = 60;
@@ -61,11 +61,7 @@ public class RadialMovieMenuDemo extends Application {
 	final double centerClosedRadius = 28;
 	final double centerOpenedRadius = 40;
 
-	final String[] menus = new String[] { "DOWLOADS", "SYNOPSIS", "VIDEO",
-		"PHOTO", "GAME", "CAST & CREW" };
-
-	radialMenu = new RadialMovieMenu(menus, itemInnerRadius, itemRadius,
-		centerClosedRadius, centerOpenedRadius);
+	radialMenu = new RadialColorMenu();
 
 	radialMenu.setTranslateX(200);
 	radialMenu.setTranslateY(200);
@@ -88,7 +84,7 @@ public class RadialMovieMenuDemo extends Application {
 	    public void handle(final KeyEvent event) {
 		System.out.println(event);
 		if (event.getCode() == KeyCode.F5) {
-		    RadialMovieMenuDemo.this.takeSnapshot(scene);
+		    RadialColorMenuDemo.this.takeSnapshot(scene);
 		}
 	    }
 	});

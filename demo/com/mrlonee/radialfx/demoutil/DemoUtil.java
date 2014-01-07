@@ -22,14 +22,23 @@ import javafx.beans.binding.StringBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ColorPickerBuilder;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.CircleBuilder;
+import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextBuilder;
+import javafx.util.Callback;
 
 public class DemoUtil extends VBox {
 
@@ -65,8 +74,7 @@ public class DemoUtil extends VBox {
 
 	    @Override
 	    protected String computeValue() {
-		return title + " : "
-			+ twoDForm.format(slider.getValue());
+		return title + " : " + twoDForm.format(slider.getValue());
 	    }
 
 	});
@@ -121,6 +129,54 @@ public class DemoUtil extends VBox {
 
 	});
 	box.getChildren().addAll(titleText, check);
+	getChildren().add(box);
+
+    }
+
+    public void addGraphicControl(final String title,
+	    final ObjectProperty<Node> graphicProperty) {
+
+	final Node circle  = CircleBuilder.create().radius(4).fill(Color.ORANGE).build();
+	final Node square  = RectangleBuilder.create().width(8).height(8).build();
+	final Node text  = TextBuilder.create().text("test").build();
+
+	final ComboBox<Node> choices = new ComboBox<Node>(FXCollections.observableArrayList(circle, square, text));
+	choices.setCellFactory(new Callback<ListView<Node>, ListCell<Node>>() {
+	    @Override
+	    public ListCell<Node> call(final ListView<Node> param) {
+		final ListCell<Node> cell = new ListCell<Node>() {
+		    @Override
+		    public void updateItem(final Node item, final boolean empty) {
+			super.updateItem(item, empty);
+			if (item != null) {
+			    setText(item.getClass().getSimpleName());
+			} else {
+			    setText(null);
+			}
+		    }
+		};
+		return cell;
+	    }
+	});
+	choices.getSelectionModel().select(0);
+	graphicProperty.bind(choices.valueProperty());
+
+	final VBox box = new VBox();
+	final Text titleText = new Text(title);
+
+	titleText.textProperty().bind(new StringBinding() {
+	    {
+		super.bind(choices.selectionModelProperty());
+	    }
+
+	    @Override
+	    protected String computeValue() {
+		return title + " : "
+			+ String.valueOf(choices.selectionModelProperty().get().getSelectedItem().getClass().getSimpleName());
+	    }
+
+	});
+	box.getChildren().addAll(titleText, choices);
 	getChildren().add(box);
 
     }
