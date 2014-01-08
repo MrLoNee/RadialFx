@@ -7,3 +7,10 @@ Use an IDE to keep it simple :)
 
 
 ![Radial Menu Global](/image/radialmenugame.png "Radial Menu Global")
+
+![Radial Menu Settings](/image/radialmenusettings.png "Radial Menu Settings")
+
+![Radial Menu Movie](/image/radialmenumovie.png "Radial Menu Movie")
+
+![Radial Menu Color](/image/radialmenucolor.png "Radial Menu Color")
+
