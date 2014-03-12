@@ -1,0 +1,210 @@
+/**
+ * Copyright 2014 (C) Mr LoNee - (Laurent NICOLAS) - www.mrlonee.com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+ */
+package com.mrlonee.radialfx.futurist;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransition;
+import javafx.animation.Timeline;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.ImageViewBuilder;
+import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.SVGPath;
+import javafx.util.Duration;
+
+import com.mrlonee.radialfx.core.RadialMenuItem;
+import com.mrlonee.radialfx.core.RadialMenuItemBuilder;
+
+/**
+ * Nest Thermostat reproduction in JavaFX.
+ *
+ * @author MrLoNee
+ */
+public class Futurist extends Region {
+
+    private Circle frame;
+    private SVGPath frame1;
+    private SVGPath frame2;
+    private SVGPath frame3;
+    private SVGPath frame4;
+    private SVGPath frame5;
+
+    private List<RadialMenuItem> items = new ArrayList<RadialMenuItem>();
+
+    private InvalidationListener listener = new InternalListener();
+    private final static double initialSize = 400;
+    private double frame0Ratio = 0.70;
+
+    public Futurist() {
+	getStylesheets().add(
+		getClass().getResource("futurist.css").toExternalForm());
+
+	getStyleClass().setAll("futurist");
+	initGraphcis();
+	registerListeners();
+	animate();
+    }
+
+    private void animate() {
+	final Animation frame3Transition = new Timeline(new KeyFrame(
+		Duration.ZERO,
+			new KeyValue(frame3.rotateProperty(), 0)),
+		new KeyFrame(Duration.millis(6700), new KeyValue(frame3.rotateProperty(), 360)));
+	frame3Transition.setCycleCount(Animation.INDEFINITE);
+
+	final Animation frame4Transition = new Timeline(new KeyFrame(
+		Duration.ZERO,
+			new KeyValue(frame4.rotateProperty(), 0)),
+		new KeyFrame(Duration.millis(12000), new KeyValue(frame4.rotateProperty(), 360)));
+	frame4Transition.setCycleCount(Animation.INDEFINITE);
+
+	final Animation frame5Transition = new Timeline(new KeyFrame(
+		Duration.ZERO,
+			new KeyValue(frame5.rotateProperty(), 0)),
+		new KeyFrame(Duration.millis(9000), new KeyValue(frame5.rotateProperty(), -360)));
+	frame5Transition.setCycleCount(Animation.INDEFINITE);
+
+
+	final ParallelTransition parallelTransition = new ParallelTransition(frame3Transition, frame4Transition, frame5Transition);
+	parallelTransition.play();
+    }
+
+    private ImageView getImageView(final String path) {
+   	ImageView imageView = null;
+   	try {
+   	    imageView = ImageViewBuilder.create()
+   		    .image(new Image(new FileInputStream(path))).build();
+   	} catch (final FileNotFoundException e) {
+   	    e.printStackTrace();
+   	}
+   	assert (imageView != null);
+   	return imageView;
+
+       }
+
+
+    private void initGraphcis() {
+	frame = new Circle();
+	frame.getStyleClass().setAll("frame");
+
+	frame1 = new SVGPath();
+	frame1.setContent("M 102.57456,0.12750195 C 92.195007,0.47620195 81.701727,2.3704919 71.385447,5.9478919 16.045167,25.138379 -13.313925,85.659469 5.8766848,140.99936 25.067297,196.33927 85.611997,225.72136 140.95225,206.53089 196.29252,187.34037 225.65162,126.79611 206.46101,71.456199 A 4.1380938,4.1380658 0 0 0 206.29868,71.061989 4.1380938,4.1380658 0 0 0 206.27549,71.038799 4.1380938,4.1380658 0 0 0 206.15955,70.644589 C 190.29078,26.069899 147.5527,-1.3835381 102.57456,0.12750195 z M 102.8992,8.3827089 C 144.38903,6.9618489 183.71143,32.234259 198.36807,73.404059 A 4.1380938,4.1380658 0 0 0 198.53039,73.798259 4.1380938,4.1380658 0 0 0 198.64633,74.169279 C 216.37166,125.28374 189.35394,180.96785 138.23915,198.69305 87.124367,216.41828 31.416697,189.42392 13.691367,138.30947 L 13.529047,137.7993 C -3.8405782,86.825139 23.153937,31.428699 74.098557,13.762499 83.626797,10.458379 93.324647,8.7105989 102.8992,8.3827089 z");
+	frame1.getStyleClass().setAll("frame1");
+
+	frame2 = new SVGPath();
+	frame2.setContent("M 109.29911,0.21781095 C 66.986303,0.31286095 26.161223,27.237885 9.4391593,66.136955 -6.1751007,100.9349 -2.2611587,143.88652 20.019363,174.81853 41.171083,204.99805 77.851403,223.67594 114.86394,221.96676 149.68709,220.80365 183.65372,202.24587 202.75376,173.15889 221.70521,145.17622 227.1362,108.27404 216.15162,76.237325 204.99552,42.510385 177.15296,15.022815 142.9754,4.9964109 132.12479,1.7069709 120.70355,0.05921095 109.29911,0.21781095 z M 110.46519,2.3026409 C 153.15411,1.6443509 194.59807,28.902785 210.8905,68.274765 225.82272,102.74161 221.3504,144.93347 198.91156,175.07754 177.00731,205.37601 138.82712,223.20561 101.34847,219.51244 65.708713,216.46569 32.103923,194.92972 15.322643,163.25769 -0.6613287,133.9406 -2.5230547,97.024405 11.538103,66.550915 25.759863,34.740385 55.915613,10.477533 90.348763,4.2806809 96.981593,2.9973309 103.69646,2.3293409 110.46519,2.3026409 z");
+	frame2.getStyleClass().setAll("frame2");
+
+	frame3 = new SVGPath();
+	frame3.setContent("M 43.728895,1.5579801 C 18.215905,18.14542 1.0898547,47.11505 0.08731473,77.69946 -1.0545353,104.00424 9.0533047,130.53073 27.450315,149.27826 27.804405,146.5025 28.850755,143.51989 26.082365,141.7204 6.3370347,118.69909 -1.2779653,85.63743 7.5901147,56.48347 13.607155,35.81642 27.087785,17.30259 45.079735,5.4053202 44.581065,3.6544502 47.731085,-2.2018498 43.728895,1.5579801 z M 163.83471,17.13539 C 162.42188,20.83226 166.7396,22.78085 168.32707,25.65423 189.62009,52.65824 193.86763,92.2359 177.99296,122.91126 170.76452,137.30151 159.84178,149.50068 146.49596,158.47766 145.74228,162.11012 145.43923,165.09421 149.13996,161.49139 171.77142,146.5209 187.40589,121.57721 190.73198,94.56072 194.52885,66.49909 185.3346,36.95536 165.71563,16.53691 163.81743,14.43781 164.18817,14.18894 163.83471,17.13539 z");
+	frame3.getStyleClass().setAll("frame3");
+
+	frame4 = new SVGPath();
+	frame4.setContent("M 73.484629,-0.19195695 C 45.237229,9.0941751 20.855609,30.336405 9.0402686,57.821365 -4.1673164,87.255805 -2.7867154,122.76833 12.419369,151.07371 L 13.453799,148.50491 C -0.71201741,120.82052 -2.0566654,86.601395 11.040139,58.217885 22.689779,32.160545 45.509559,11.398285 72.501919,2.2216751 L 73.484629,-0.19195695 z M 199.80455,50.856315 198.85632,53.166515 C 199.97067,55.357945 201.01627,57.593365 201.95959,59.872945 216.25943,92.880155 211.9661,133.27445 190.47754,162.14192 177.97667,179.4334 159.93909,192.47486 139.80818,199.44975 L 138.82549,201.9151 C 161.2219,194.61791 181.24785,179.98866 194.16696,160.31446 212.31581,133.51685 217.51315,98.173115 206.99377,67.493135 205.0897,61.736775 202.66765,56.172255 199.80455,50.856315 z");
+	frame4.getStyleClass().setAll("frame4");
+
+	frame5 = new SVGPath();
+	frame5.setContent("M 94.1875,2.53125 95.4375,2.53125 96.8125,2.53125 96.875,2.53125 100.09375,2.6875 100.125,2.6875 100.40625,2.6875 101.65625,2.8125 101.84375,0.28125 100.59375,0.1875 100.28125,0.15625 100.25,0.15625 96.9375,0.03125 96.875,0.03125 95.46875,0 94.1875,0 z M 85.21875,0.4375 81.59375,0.84375 81.53125,0.84375 80.125,1.03125 78.875,1.25 79.28125,3.75 80.53125,3.53125 81.875,3.34375 81.90625,3.34375 85.5,2.9375 86.75,2.8125 86.46875,0.28125 z M 109.0625,3.59375 110.3125,3.8125 113,4.3125 113.03125,4.3125 115.25,4.78125 116.46875,5.03125 117,2.5625 115.78125,2.3125 113.5,1.8125 113.46875,1.8125 110.75,1.34375 109.53125,1.125 z M 70.125,3.03125 69.5625,3.15625 69.53125,3.15625 65.59375,4.28125 65.53125,4.28125 65.15625,4.40625 63.9375,4.78125 64.71875,7.1875 65.9375,6.8125 66.28125,6.6875 66.3125,6.6875 70.15625,5.625 70.21875,5.59375 70.71875,5.46875 71.9375,5.1875 71.34375,2.71875 z M 123.65625,7.03125 124.875,7.40625 125.46875,7.59375 125.5,7.59375 128.5,8.65625 128.53125,8.6875 129.5625,9.0625 130.71875,9.53125 131.65625,7.1875 130.46875,6.71875 129.4375,6.3125 129.375,6.28125 126.3125,5.21875 126.28125,5.1875 125.625,5 124.4375,4.59375 z M 55.53125,7.875 53,9 52.96875,9 50.875,9.96875 49.75,10.53125 50.8125,12.8125 51.96875,12.25 54,11.3125 54.03125,11.28125 56.53125,10.1875 57.6875,9.6875 56.6875,7.375 z M 137.5625,12.5625 138.6875,13.125 140.25,13.9375 140.28125,13.9375 143.09375,15.5 144.21875,16.125 145.4375,13.90625 144.3125,13.28125 141.46875,11.71875 141.4375,11.6875 139.8125,10.875 138.6875,10.3125 z M 41.875,14.875 39.75,16.21875 39.71875,16.25 37.625,17.65625 36.5625,18.375 37.96875,20.46875 39.03125,19.75 41.09375,18.375 41.125,18.34375 43.21875,17.03125 44.3125,16.34375 42.9375,14.21875 z M 29.46875,23.90625 27.96875,25.1875 27.9375,25.21875 25.8125,27.15625 25.78125,27.1875 25.65625,27.3125 24.75,28.1875 26.5,30.03125 27.40625,29.125 27.5,29.03125 27.53125,29 29.625,27.09375 29.65625,27.09375 31.125,25.8125 32.0625,25 30.4375,23.09375 z M 18.59375,34.71875 17.78125,35.65625 17.75,35.65625 15.9375,37.90625 15.90625,37.9375 15.34375,38.6875 14.5625,39.6875 16.5625,41.21875 17.34375,40.21875 17.90625,39.5 17.9375,39.46875 19.6875,37.3125 19.71875,37.28125 20.5,36.375 21.3125,35.40625 19.40625,33.75 z M 9.46875,47.0625 9.28125,47.375 9.25,47.40625 7.78125,49.875 7.75,49.90625 6.875,51.46875 6.25,52.5625 8.46875,53.8125 9.09375,52.71875 9.9375,51.15625 9.96875,51.125 11.40625,48.75 11.40625,48.71875 11.625,48.40625 12.28125,47.34375 10.15625,46 z M 2.34375,60.65625 1.4375,62.84375 1.40625,62.875 0.4375,65.375 0,66.5625 2.34375,67.46875 2.8125,66.3125 3.75,63.8125 3.78125,63.78125 4.6875,61.65625 5.15625,60.46875 2.84375,59.5 z M 186.09375,134.3125 185.15625,136.8125 185.125,136.84375 184.21875,138.96875 183.75,140.15625 186.0625,141.125 186.5625,139.96875 187.46875,137.78125 187.5,137.75 188.46875,135.21875 188.90625,134.0625 186.5625,133.125 z M 179.84375,147.90625 178.96875,149.46875 178.9375,149.5 177.5,151.90625 177.46875,151.9375 177.3125,152.21875 176.625,153.28125 178.75,154.625 179.4375,153.5625 179.625,153.25 179.65625,153.21875 181.125,150.78125 181.125,150.75 182.03125,149.15625 182.65625,148.0625 180.4375,146.8125 z M 171.5625,160.40625 170.96875,161.15625 171,161.15625 169.21875,163.34375 169.1875,163.375 168.40625,164.25 167.59375,165.21875 169.5,166.875 170.3125,165.90625 171.125,165 171.15625,164.96875 172.96875,162.75 172.96875,162.71875 173.5625,161.9375 174.34375,160.9375 172.34375,159.40625 z M 161.5,171.46875 161.375,171.59375 159.28125,173.53125 159.25,173.5625 157.8125,174.8125 156.84375,175.625 158.5,177.53125 159.4375,176.71875 160.9375,175.4375 163.09375,173.46875 163.125,173.4375 163.28125,173.3125 164.1875,172.40625 162.40625,170.59375 z M 149.90625,180.875 147.8125,182.28125 147.78125,182.28125 145.6875,183.59375 144.625,184.28125 145.96875,186.40625 147.03125,185.75 149.15625,184.40625 149.1875,184.375 151.3125,182.96875 152.34375,182.25 150.9375,180.15625 z M 43.5,186.75 44.59375,187.34375 46.875,188.59375 46.90625,188.625 49.09375,189.75 50.1875,190.34375 51.375,188.09375 50.25,187.53125 48.09375,186.40625 48.0625,186.375 45.8125,185.125 44.71875,184.53125 z M 136.9375,188.375 134.90625,189.34375 134.875,189.34375 132.375,190.4375 131.21875,190.9375 132.21875,193.25 133.375,192.75 135.90625,191.65625 135.9375,191.625 138.03125,190.65625 139.1875,190.125 138.09375,187.8125 z M 57.25,193.46875 58.4375,193.9375 58.78125,194.0625 58.8125,194.0625 61.25,194.96875 61.28125,194.96875 63.25,195.625 64.46875,196.03125 65.25,193.65625 64.0625,193.25 62.125,192.59375 62.09375,192.59375 62.09375,192.5625 59.71875,191.71875 59.6875,191.6875 59.375,191.5625 58.1875,191.09375 z M 123,193.8125 121.28125,194.34375 121.25,194.34375 118.65625,195.0625 118.65625,195.03125 118.21875,195.15625 116.96875,195.4375 117.5625,197.90625 118.8125,197.625 119.25,197.5 119.28125,197.5 121.9375,196.78125 121.96875,196.75 123.75,196.21875 124.9375,195.875 124.21875,193.4375 z M 71.90625,198.0625 73.125,198.34375 73.90625,198.5 73.9375,198.5 76.5,199 76.53125,199 78.15625,199.28125 79.40625,199.5 79.84375,197 78.59375,196.8125 76.96875,196.53125 76.9375,196.53125 74.4375,196.03125 74.40625,196.03125 73.6875,195.875 72.46875,195.59375 z M 108.40625,197.09375 108.125,197.15625 108.09375,197.15625 105.5,197.46875 105.46875,197.46875 103.4375,197.6875 102.1875,197.8125 102.4375,200.34375 103.6875,200.1875 105.75,200 105.78125,200 108.46875,199.65625 108.5,199.65625 108.78125,199.59375 110.03125,199.40625 109.65625,196.90625 z M 87.09375,200.375 88.34375,200.4375 89.65625,200.53125 89.6875,200.53125 92.3125,200.625 92.34375,200.625 93.46875,200.625 94.71875,200.625 94.75,198.09375 93.5,198.09375 92.40625,198.09375 92.375,198.09375 89.8125,198 89.78125,198 88.5,197.90625 87.25,197.84375 z");
+	frame5.getStyleClass().setAll("frame5");
+
+	for (int i=0; i<4; i++){
+	    final RadialMenuItem item = RadialMenuItemBuilder.create()
+		    .clockwise(true)
+		    .startAngle(i*90.0/4.0)
+		    .graphic(getImageView("resources/icons/gemicon/PNG/32x32/row 1/"+(i+9)+".png"))
+		    .length(90.0/4.0)
+		    .backgroundFill(Color.web("#73738f"))
+		    .backgroundMouseOnFill(Color.web("#8a8aa1"))
+		    .strokeVisible(false)
+		    .offset(4)
+		    .build();
+	    items.add(item);
+	}
+
+
+	getChildren().addAll(frame, frame1, frame2, frame3, frame4, frame5);
+	getChildren().addAll(items);
+    }
+
+    private void registerListeners() {
+	widthProperty().addListener(listener);
+	heightProperty().addListener(listener);
+    }
+
+    private void resize() {
+	final double size = getWidth() < getHeight() ? getWidth() : getHeight();
+
+	frame.setRadius(frame0Ratio * size / 2.0);
+	frame.setTranslateX(size / 2.0);
+	frame.setTranslateY(size / 2.0);
+
+	final double scaleRatio = size / initialSize;
+	frame1.setScaleX(scaleRatio);
+	frame1.setScaleY(scaleRatio);
+	frame1.setTranslateX(size / 2.0 - frame1.getBoundsInLocal().getWidth() / 2.0);
+	frame1.setTranslateY(size / 2.0 - frame1.getBoundsInLocal().getHeight() / 2.0);
+
+	frame2.setScaleX(scaleRatio);
+	frame2.setScaleY(scaleRatio);
+	frame2.setTranslateX(size / 2.0 - frame2.getBoundsInLocal().getWidth() / 2.0);
+	frame2.setTranslateY(size / 2.0 - frame2.getBoundsInLocal().getHeight() / 2.0);
+
+	frame3.setScaleX(scaleRatio);
+	frame3.setScaleY(scaleRatio);
+	frame3.setTranslateX(size / 2.0 - frame3.getBoundsInLocal().getWidth() / 2.0);
+	frame3.setTranslateY(size / 2.0 - frame3.getBoundsInLocal().getHeight() / 2.0);
+
+	frame4.setScaleX(scaleRatio);
+	frame4.setScaleY(scaleRatio);
+	frame4.setTranslateX(size / 2.0 - frame4.getBoundsInLocal().getWidth() / 2.0);
+	frame4.setTranslateY(size / 2.0 - frame4.getBoundsInLocal().getHeight() / 2.0);
+
+	frame5.setScaleX(scaleRatio);
+	frame5.setScaleY(scaleRatio);
+	frame5.setTranslateX(size / 2.0 - frame5.getBoundsInLocal().getWidth() / 2.0);
+	frame5.setTranslateY(size / 2.0 - frame5.getBoundsInLocal().getHeight() / 2.0);
+
+	for(final RadialMenuItem item : items){
+	    item.setTranslateX(size / 2.0);
+	    item.setTranslateY(size / 2.0);
+	    item.setInnerRadius(frame.getRadius());
+	    item.setRadius(size/2.0-6);
+	}
+
+    }
+
+    private final class InternalListener implements InvalidationListener {
+
+	@Override
+	public void invalidated(final Observable value) {
+	    resize();
+
+	}
+    }
+
+}

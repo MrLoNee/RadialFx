@@ -56,12 +56,12 @@ public class RadialGlobalMenu extends Group {
     private static final Color BACK_GRADIENT_COLOR = Color.web("000000a0");
     private final Color BACK_SELECT_GRADIENT_COLOR = Color.web("00fffb97");
 
-    private DoubleProperty length = new SimpleDoubleProperty(45);
-    private DoubleProperty innerRadius = new SimpleDoubleProperty(150);
-    private DoubleProperty radius = new SimpleDoubleProperty(300);
-    private DoubleProperty offset = new SimpleDoubleProperty(6);
-    private DoubleProperty widthProp = new SimpleDoubleProperty();
-    private DoubleProperty heightProp = new SimpleDoubleProperty();
+    private final DoubleProperty length = new SimpleDoubleProperty(45);
+    private final DoubleProperty innerRadius = new SimpleDoubleProperty(150);
+    private final DoubleProperty radius = new SimpleDoubleProperty(300);
+    private final DoubleProperty offset = new SimpleDoubleProperty(6);
+    private final DoubleProperty widthProp = new SimpleDoubleProperty();
+    private final DoubleProperty heightProp = new SimpleDoubleProperty();
 
     private final List<RadialMenuItem> items = new ArrayList<RadialMenuItem>();
     private final double initialAngle = -90 + 45.0 / 2.0;
@@ -71,7 +71,6 @@ public class RadialGlobalMenu extends Group {
 
     public RadialGlobalMenu() {
 	backContainer = new Group();
-
 	final ChangeListener<Number> sizeChangeListener = new ChangeListener<Number>() {
 
 	    @Override
@@ -86,14 +85,6 @@ public class RadialGlobalMenu extends Group {
 	computeItemsStartAngle();
 
 	getChildren().setAll(backContainer, itemsContainer);
-    }
-
-    public DoubleProperty widthProperty() {
-	return widthProp;
-    }
-
-    public DoubleProperty heightProperty() {
-	return heightProp;
     }
 
     private void computeBack() {
@@ -243,6 +234,51 @@ public class RadialGlobalMenu extends Group {
 	backContainer.setOpacity(from);
 	return fadeIn;
 
+    }
+    public void setHeight(final double value){
+	heightProp.set(value);
+    }
+    public double getHeight(){
+	return heightProp.get();
+    }
+    public DoubleProperty heightProperty() {
+	return heightProp;
+    }
+    public void setInnerRadius(final double value){
+	innerRadius.set(value);
+    }
+    public double getInnerRadius(){
+	return innerRadius.get();
+    }
+    public DoubleProperty innerRadiusProperty(){
+	return innerRadius;
+    }
+    public void setRadius(final double value){
+	radius.set(value);
+    }
+    public double getRadius(){
+	return radius.get();
+    }
+    public DoubleProperty radiusProperty(){
+	return radius;
+    }
+    public void setOffset(final double value){
+	offset.set(value);
+    }
+    public double getOffset(){
+	return offset.get();
+    }
+    public DoubleProperty offsetProperty(){
+	return offset;
+    }
+    public void setWidth(final double value){
+	widthProp.set(value);
+    }
+    public double getWidth(){
+	return widthProp.get();
+    }
+    public DoubleProperty widthProperty() {
+	return widthProp;
     }
 
 }

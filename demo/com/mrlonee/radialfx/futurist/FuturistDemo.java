@@ -14,8 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
-
-package com.mrlonee.radialfx.colormenu;
+package com.mrlonee.radialfx.futurist;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,62 +27,49 @@ import javafx.scene.Scene;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import javax.imageio.ImageIO;
 
-public class RadialColorMenuDemo extends Application {
+public class FuturistDemo extends Application {
 
     public static void main(final String[] args) {
 	launch(args);
     }
 
-    private Group container;
-    private RadialColorMenu radialMenu;
-
     @Override
     public void start(final Stage primaryStage) throws Exception {
-	container = new Group();
-	final Scene scene = new Scene(container);
-	scene.setFill(Color.WHITE);
-	primaryStage.setResizable(false);
-	primaryStage.setScene(scene);
-	primaryStage.setWidth(450);
-	primaryStage.setHeight(480);
-	primaryStage.centerOnScreen();
-	primaryStage.setTitle("Radial Color Menu Demo");
-	primaryStage.show();
-
-	radialMenu = new RadialColorMenu();
-
-	radialMenu.setTranslateX(200);
-	radialMenu.setTranslateY(200);
-	container.getChildren().addAll(radialMenu);
-
-	scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
+	final Group container = new Group();
+	final Scene scene = new Scene(container, Color.web("000033"));
+	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 	    @Override
-	    public void handle(final MouseEvent event) {
-		if (event.isSecondaryButtonDown()) {
-		    radialMenu.setTranslateX(event.getX());
-		    radialMenu.setTranslateY(event.getY());
-		}
+	    public void handle(final WindowEvent event) {
+		System.exit(0);
 	    }
 	});
-
 	scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 	    @Override
 	    public void handle(final KeyEvent event) {
 		System.out.println(event);
 		if (event.getCode() == KeyCode.F5) {
-		    RadialColorMenuDemo.this.takeSnapshot(scene);
+		    takeSnapshot(scene);
 		}
 	    }
 	});
+	primaryStage.setScene(scene);
+	primaryStage.setWidth(400);
+	primaryStage.setHeight(400);
 
+	final Futurist nest = new Futurist();
+	nest.setPrefSize(400, 400);
+	nest.prefWidthProperty().bind(scene.widthProperty());
+	nest.prefHeightProperty().bind(scene.heightProperty());
+	container.getChildren().add(nest);
+
+	primaryStage.show();
     }
 
     int snapshotCounter = 0;
@@ -93,7 +79,7 @@ public class RadialColorMenuDemo extends Application {
 	final WritableImage writableImage = scene.snapshot(null);
 
 	// Write snapshot to file system as a .png image
-	final File outFile = new File("snapshot/radialmenu-snapshot-"
+	final File outFile = new File("snapshot/"+getClass().getSimpleName().toLowerCase()+"-"
 		+ snapshotCounter + ".png");
 	outFile.getParentFile().mkdirs();
 	try {

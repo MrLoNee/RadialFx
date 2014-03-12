@@ -1,0 +1,34 @@
+.futurist{}
+
+.futurist .frame {
+      -fx-fill 					: radial-gradient(center 50% 50%, radius 50%, 
+                                          	#000033 0%,
+      										#000036 59.501535%,
+      										#07236c 67.82127%,
+      										#07236c 80.842304%,
+      										#030b4f 84.50883%,
+      										#010542 89.007419%,
+      										#000036 100%);
+      -fx-stroke-width 		: 5;
+      -fx-stroke	 		: #040945;
+}
+
+.futurist .frame1 {
+		-fx-fill				: #00002a;
+}
+
+.futurist .frame2 {
+     -fx-fill	 			: #2f3e76; 
+}
+
+.futurist .frame3 {
+     -fx-fill	 			: #0186bf; 
+}
+
+.futurist .frame4 {
+     -fx-fill	 			: #0186bf; 
+}
+
+.futurist .frame5 {
+     -fx-fill	 			: #0186bf;
+}

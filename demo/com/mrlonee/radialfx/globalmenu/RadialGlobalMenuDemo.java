@@ -32,6 +32,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
+import com.mrlonee.radialfx.demoutil.DemoUtil;
+
 public class RadialGlobalMenuDemo extends Application {
 
     public static void main(final String[] args) {
@@ -77,6 +79,23 @@ public class RadialGlobalMenuDemo extends Application {
 	radialMenu.heightProperty().bind(scene.heightProperty());
 	radialMenu.setVisible(visible);
 
+	final DemoUtil demoUtil = new DemoUtil();
+//	demoUtil.addRadiusControl("Inner Radius", radialMenu.innerRadiusProperty());
+//	demoUtil.addRadiusControl("Radius", radialMenu.radiusProperty());
+//	demoUtil.addRadiusControl("Offset", radialMenu.offsetProperty());
+//	demoUtil.addColorControl("Background", item.backgroundFillProperty());
+//	demoUtil.addColorControl("BackgroundMouseOn",
+//		item.backgroundMouseOnFillProperty());
+//	demoUtil.addColorControl("Stroke", item.strokeFillProperty());
+//	demoUtil.addColorControl("StrokeMouseOn",
+//		item.strokeMouseOnFillProperty());
+//	demoUtil.addBooleanControl("BackgroundVisible",
+//		item.backgroundVisibleProperty());
+//	demoUtil.addBooleanControl("StrokeVisible",
+//		item.strokeVisibleProperty());
+//	demoUtil.addGraphicControl("Graphic",
+//		item.graphicProperty());
+
 	final ToggleButton showHideButton = new ToggleButton("Toggle display");
 	showHideButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -105,7 +124,9 @@ public class RadialGlobalMenuDemo extends Application {
 	exitButton.setTranslateY(20);
 	final HBox box = new HBox();
 	box.getChildren().addAll(showHideButton, exitButton);
-	container.getChildren().addAll(radialMenu, box);
+	demoUtil.setTranslateX(100);
+	demoUtil.setTranslateY(300);
+	container.getChildren().addAll(radialMenu, demoUtil, box);
 
 	primaryStage.show();
 

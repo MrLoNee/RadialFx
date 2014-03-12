@@ -1,0 +1,76 @@
+.nest{}
+
+.nest .frame {
+      -fx-background-radius		: 1024px;
+      -fx-background-color 		: linear-gradient(from 27.1% 6.5% to 77.35% 91%,  
+                                          	#e8e8e8 0%, 
+                                          	#c6c6c6 50%, 
+                                          	#a6a6a6 100%);
+}
+
+.nest .frame1 {
+      -fx-fill 					: linear-gradient(from 27.1% 6.5% to 77.35% 91%, 
+                                          	#fdfdfd 0%,
+      										#ededed 3.552646%,
+      										#d7d7d7 7.277831%,
+      										#d2d2d2 11.973317%,
+      										#c7c7c7 18.269639%,
+      										#c1c1c1 25.449407%,
+      										#b0b0b0 32.21809%,
+      										#999999 37.210315%,
+      										#868686 43.145844%,
+      										#747474 49.577036%,
+      										#5c5c5c 55.667913%,
+      										#5a5a5a 61.299348%,
+      										#5e5e5e 68.340749%,
+      										#676767 76.115692%,
+      										#706e6f 82.365692%,
+      										#838383 88.148153%,
+      										#959595 93.637025%,
+      										#a8a8a8 100%);
+      -fx-stroke-width 		: 2;
+      -fx-stroke	 		: linear-gradient(from 27.1% 6.5% to 77.35% 91%, 
+                                          	#d5d5d5 0%, 
+                                          	#747474 50%, 
+                                          	#8f8f8f 100%);
+      										
+}
+
+
+.nest .frame2 {
+     -fx-fill	 			: linear-gradient(from 27.1% 6.5% to 77.35% 91%, 
+                                          	#1c1715 0%, 
+                                          	#181818 50%, 
+                                          	#3a3a3a 100%); 
+      -fx-stroke			: #212121;
+      -fx-stroke-width 		: 1;
+}
+
+.nest .frame3 {
+     -fx-fill	 			: #c44f1a; 
+}
+
+.nest .line {
+		-fx-fill				: #ffffff00;
+	 	-fx-stroke				: #4d4d4d;
+	 	-fx-stroke-width		: 1.5;
+}
+
+.nest .line1 {
+		-fx-fill				: #ffffff00;
+	 	-fx-stroke				: #141414;
+	 	-fx-stroke-width		: 1.5;
+}
+
+.nest .text {
+	-fx-fill 				: #ffffff;
+	-fx-font-size			: 86;
+	-fx-font-weight			: bold;			
+}
+
+.nest .delaytext {
+	-fx-fill 				: #ffffffff;
+	-fx-font-size			: 18;
+	-fx-font-weight			: lighter;			
+}
+

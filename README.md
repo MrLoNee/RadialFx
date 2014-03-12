@@ -18,3 +18,8 @@ Use an IDE to keep it simple :)
 ### Radial Menu Color
 ![Radial Menu Color](/image/radialmenucolor.png "Radial Menu Color")
 
+### Radial Nest Thermostat
+![Radial Nest Thermostat](/image/nestthermostat.png "Radial Nest Thermostat")
+
+### Radial Futurist Menu
+![Radial Futurist Menu](/image/futurist.png "Radial Futurist Menu")
